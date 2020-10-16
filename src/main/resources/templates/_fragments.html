@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:fragment="head(title)">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <link rel="stylesheet" href="../static/css/my.css" th:href="@{/css/my.css}">
+    <link rel="stylesheet" href="../static/css/typo1.css"  th:href="@{/css/typo1.css}">
+    <link rel="stylesheet" href="../static/css/animate1.css"  th:href="@{/css/animate1.css}">
+    <link rel="stylesheet" href="../static/lib/prism/prism.css"  th:href="@{/lib/prism/prism.css}">
+    <link rel="stylesheet" href="../static/lib/tocbot/tocbot.css"  th:href="@{/lib/tocbot/tocbot.css}">
+    <!--
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" >-->
+    <title th:replace="${title}">博客</title>
+</head>
+<body>
+
+    <!--导航-->
+    <nav th:fragment="menu(n)" class=" ui inverted attached segment m-padded-tb-mini m-opcity-mini m-shadow-small" >
+        <div class="ui container ">
+            <div class="ui  inverted secondary menu stackable ">
+                <h2 class="ui teal header item ">小李子</h2>
+                <a href="#" th:href="@{/}" class="m-item item m-mobile-hide" th:classappend="${n==1} ? 'active'"><i class="home icon"></i>首页</a>
+                <a href="#" class="m-item item m-mobile-hide" th:classappend="${n==2} ? 'active'"><i class="idea icon"></i>分类</a>
+                <a href="#" class="m-item item m-mobile-hide" th:classappend="${n==3} ? 'active'"><i class="tags  icon"></i>标签</a>
+                <a href="#" class="m-item item m-mobile-hide" th:classappend="${n==4} ? 'active'"><i class="clone  icon"></i>归档 </a>
+                <a href="#" class="m-item item m-mobile-hide" th:classappend="${n==5} ? 'active'"><i class="info icon"></i>关于我</a>
+                <div class="m-item right item m-mobile-hide">
+                    <form action="#" name="search" th:action="@{/search}"  method="post">
+                        <input type="hidden" name="page">
+                        <div class="ui icon  input ">
+                            <input type="text" name="search" placeholder="搜索..." th:value="${search}">
+                            <i onclick="document.forms['search'].submit()" class="search icon link "></i>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <a href="#"  class="ui menu toggle black icon button m-top-right m-mobile-show">
+            <i class="sidebar icon"></i>
+        </a>
+    </nav>
+
+    <!--底部footer-->
+    <footer th:fragment="footer" class="ui inverted vertical segment m-padded-tb-max m-opcity-mini" >
+        <div class="ui center aligned container">
+            <div class="ui inverted divided stackable grid">
+                <div class="three wide column ">
+                    <div class="ui inverted link list">
+                        <div class="item">
+                            <img th:src="@{/images/wechat.png}" src="../static/images/wechat.png" class="ui rounded image" style="width: 100px">
+                        </div>
+                    </div>
+                </div>
+                <div class="three wide column">
+                    <h4 class="ui inverted header m-text-thin m-text-spaced">最新博客</h4>
+                    <div class="ui inverted link list">
+                        <a href="#" class="item">用户故事</a>
+                        <a href="#" class="item">用户故事</a>
+                        <a href="#" class="item">用户故事</a>
+                    </div>
+                </div>
+                <div class="three wide column ">
+                    <h4 class="ui inverted header m-text-thin m-text-spaced">联系我</h4>
+                    <div class="ui inverted link list">
+                        <a href="#" class="item">Email：123456789@qq.com</a>
+                        <a href="#" class="item">QQ：123456789</a>
+                    </div>
+                </div>
+                <div class="seven wide column ">
+                    <h4 class="ui inverted header m-text-thin m-text-spaced">小李子</h4>
+                    <p class="m-text-thin m-text-spaced m-opcity-mini">干啥啥不行，吃饭第一名。。。。。。。。</p>
+                </div>
+            </div>
+            <div class="ui inverted section divider"></div>
+            <p class="m-text-thin m-text-spaced m-opcity-tiny">Copyright 2020 Designed by 小李子</p>
+        </div>
+    </footer>
+
+    <th:block th:fragment="script">
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+        <script src="//cdn.jsdelivr.net/npm/jquery.scrollto@2.1.2/jquery.scrollTo.min.js"></script>
+        <script src="../static/lib/prism/prism.js" th:src="@{/lib/prism/prism.js}"></script>
+        <script src="../static/lib/tocbot/tocbot.min.js" th:src="@{/lib/tocbot/tocbot.min.js}"></script>
+        <script src="../static/lib/qrcode/qrcode.min.js" th:src="@{/lib/qrcode/qrcode.min.js}"></script>
+        <script src="../static/lib/waypoints/jquery.waypoints.min.js" th:src="@{/lib/waypoints/jquery.waypoints.min.js}"></script>
+    </th:block>
+</body>
+</html>

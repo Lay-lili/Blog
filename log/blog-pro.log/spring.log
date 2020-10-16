@@ -1,0 +1,5 @@
+2020-09-28 15:05:05.881  INFO 17268 --- [restartedMain] com.lili.blog.BlogApplication            : Starting BlogApplication on 03S5P1A67G3RFU6 with PID 17268 (C:\Users\Administrator\Desktop\thingsboard3.1\blog\target\classes started by Administrator in C:\Users\Administrator\Desktop\thingsboard3.1\blog)
+2020-09-28 15:05:05.884  INFO 17268 --- [restartedMain] com.lili.blog.BlogApplication            : The following profiles are active: pro
+2020-09-28 15:05:07.006  WARN 17268 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2020-09-28 15:05:07.225  WARN 17268 --- [restartedMain] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+2020-09-28 15:05:07.326  INFO 17268 --- [restartedMain] com.lili.blog.BlogApplication            : Started BlogApplication in 1.809 seconds (JVM running for 2.457)
