@@ -63,10 +63,10 @@
                                                     <div class="content"><a href="#" class="header" th:text="${blog.user.nickname}">小李子</a></div>
                                                 </div>
                                                 <div class=" item ui ">
-                                                    <i class="calendar icon"></i><span th:text="${#dates.format(blog.updateTime, 'yyyy-MM-dd')}">2020-9-21</span>
+                                                    <i class="calendar icon"></i>&nbsp;<span th:text="${#dates.format(blog.updateTime, 'yyyy-MM-dd')}">2020-9-21</span>
                                                 </div>
                                                 <div class="item">
-                                                    <i class="eye icon"></i><span  th:text="${blog.views}">1212</span>
+                                                    <i class="eye icon"></i>&nbsp;<span th:text="${blog.views}">1212</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -106,13 +106,13 @@
                                     <i class="idea icon"></i>分类
                                 </div>
                                 <div class="column right aligned">
-                                    <a href="#" target="_blank">更多<i class="angle double right icon"></i></a>
+                                    <a href="#" th:href="@{/types/-1}" target="_blank">更多<i class="angle double right icon"></i></a>
                                 </div>
                             </div>
                         </div>
                         <div class="ui segment">
                             <div class="ui fluid vertical menu">
-                                <a class="item" href="#" th:each="type : ${types}">
+                                <a class="item" href="#" th:href="@{/types/{id}(id=${type.id})}" target="_blank"  th:each="type : ${types}">
                                     <span th:text="${type.name}">学习日志</span>
                                     <div class="ui teal basic label left pointing" th:text="${#arrays.length(type.blogs)}">13</div>
                                 </a>
@@ -128,12 +128,12 @@
                                     <i class="tags icon"></i>标签
                                 </div>
                                 <div class="column right aligned">
-                                    <a href="#" target="_blank">更多<i class="angle double right icon"></i></a>
+                                    <a href="#" th:href="@{/types/-1}" target="_blank">更多<i class="angle double right icon"></i></a>
                                 </div>
                             </div>
                         </div>
                         <div class="ui segment">
-                            <a target="_blank" href="" th:each="tag : ${tags}"  class="ui teal basic label left pointing m-margin-tiny">
+                            <a target="_blank" th:href="@{/tags/{id}(id=${tag.id})}" href="" th:each="tag : ${tags}"  class="ui teal basic label left pointing m-margin-tiny">
                                 <span th:text="${tag.name}">方法论</span> <div class="detail" th:text="${#arrays.length(tag.blogs)}">13</div>
                             </a>
                             <!--/*-->

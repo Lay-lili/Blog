@@ -3,6 +3,12 @@ spring:
     mode: HTML
   profiles:
     active: dev
+  messages:
+    basename: i18n/messages
+
 
 server:
   port: 8081
+
+
+comment.avatar: /images/avatar.png

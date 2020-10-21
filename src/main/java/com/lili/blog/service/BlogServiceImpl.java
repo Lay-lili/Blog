@@ -16,13 +16,8 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import javax.persistence.criteria.*;
+import java.util.*;
 
 @Service
 public class BlogServiceImpl implements BlogService{
@@ -35,6 +30,7 @@ public class BlogServiceImpl implements BlogService{
         return blogRepository.findById(id).orElse(null);
     }
 
+    @Transactional
     @Override
     public Blog getAndConvertBlog(Long id) {
         Blog blog = blogRepository.findById(id).orElse(null);
@@ -47,6 +43,8 @@ public class BlogServiceImpl implements BlogService{
         String content = b.getContent();
         String c = MarkdownUtils.markdownToHtmlExtensions(content);
         b.setContent(c);
+
+        blogRepository.updateViews(b.getId());
         return b;
 
     }
@@ -110,6 +108,11 @@ public class BlogServiceImpl implements BlogService{
     }
 
     @Override
+    public Page<Blog> listBlogPublished(Pageable pageable) {    //查询所有分布的博客
+        return blogRepository.findAllPublished(pageable);
+    }
+
+    @Override
     public List<Blog> listBlogTop(Integer size) {
         Sort sort =  Sort.by(Sort.Direction.DESC, "updateTime");  //按照该分类下的博客数量倒序排列
         Pageable pageable =  PageRequest.of(0, size, sort);
@@ -120,5 +123,33 @@ public class BlogServiceImpl implements BlogService{
     public Page<Blog> listBlogSearch(String search, Pageable pageable) {
 
         return blogRepository.findBySearch(search, pageable);
+    }
+
+    @Override
+    public Page<Blog> listBlog(Long tagId, Pageable pageable) {
+        return blogRepository.findAll(new Specification<Blog>() {
+            @Override
+            public Predicate toPredicate(Root<Blog> root, CriteriaQuery<?> cq, CriteriaBuilder cb) {
+                Join join = root.join("tags");
+
+                return cb.equal(join.get("id"), tagId);
+            }
+        }, pageable);
+    }
+
+    @Override
+    public Map<String, List<Blog>> archiveBlogs() {
+        List<String> years = blogRepository.findYears();
+        Map<String,List<Blog>> archiveBlogs = new LinkedHashMap<>();
+        for (String year : years){
+            //System.out.println(year);
+            archiveBlogs.put(year,blogRepository.findByYear(year));
+        }
+        return archiveBlogs;
+    }
+
+    @Override
+    public Long getBlogCount() {
+        return blogRepository.count();
     }
 }

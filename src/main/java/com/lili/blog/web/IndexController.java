@@ -31,7 +31,7 @@ public class IndexController {
     public String index(Model model
             , @PageableDefault(size=2, sort = {"updateTime"}, direction = Sort.Direction.DESC) Pageable pageable){
 
-        model.addAttribute("page", blogService.listBlog(pageable));
+        model.addAttribute("page", blogService.listBlogPublished(pageable));
         model.addAttribute("types", typeService.listTypeTop(3));
         model.addAttribute("tags", tagService.listTagTop(5));
         model.addAttribute("recommendBlogs", blogService.listBlogTop(5));
@@ -51,4 +51,11 @@ public class IndexController {
         model.addAttribute("blog", blogService.getAndConvertBlog(id));
          return "blog";
     }
+
+    @GetMapping("/footer")
+    public String newBlogs(Model model){
+        model.addAttribute("newBlogs", blogService.listBlogTop(3));
+        return "_fragments :: newBlogList";
+    }
+
 }
