@@ -27,7 +27,7 @@ public class LogAspect {  //日志切面
 
     //在切面之前处理
     @Before("log()")
-    public  void doBfore(JoinPoint joinPoint){
+    public  void doBefore(JoinPoint joinPoint){
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();
         String url = request.getRequestURL().toString();
@@ -44,7 +44,7 @@ public class LogAspect {  //日志切面
 
     //在切面之后处理
     @After("log()")
-    public  void doAFter(){
+    public  void doAfter(){
         logger.info("-----doAfter------");
     }
 
